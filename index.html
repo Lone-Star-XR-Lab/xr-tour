@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07111f" />
+  <title>XR Lab Tour | Lone Star College–Tomball</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2e;
+      --card: rgba(17, 35, 58, 0.82);
+      --card-solid: #11233a;
+      --text: #f4f7fb;
+      --muted: #aab8ca;
+      --accent: #f5c542;
+      --accent-2: #69b7ff;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 20px 50px rgba(0,0,0,.28);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(105,183,255,.18), transparent 34rem),
+        radial-gradient(circle at 90% 16%, rgba(245,197,66,.12), transparent 28rem),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--accent);
+      color: #111;
+      padding: .7rem 1rem;
+      z-index: 999;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,17,31,.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: auto;
+      padding: .9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #ffe58b);
+      color: #111;
+      box-shadow: 0 8px 24px rgba(245,197,66,.25);
+      font-weight: 900;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: .65rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .72rem 1rem;
+      cursor: pointer;
+      color: var(--text);
+      background: rgba(255,255,255,.05);
+      transition: .2s ease;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.1);
+      outline: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+      border-color: transparent;
+    }
+
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background: #ffe07a;
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: auto;
+      padding: 7rem 1.2rem 4.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 3rem;
+      align-items: center;
+      min-height: 82vh;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 800;
+      font-size: .82rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 { line-height: 1.12; margin-top: 0; }
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      margin-bottom: 1.3rem;
+      letter-spacing: -.055em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 780px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 450px;
+      padding: 2rem;
+      border-radius: 34px;
+      background:
+        linear-gradient(150deg, rgba(105,183,255,.16), rgba(245,197,66,.08)),
+        var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      opacity: .55;
+    }
+    .hero-card::before {
+      width: 190px; height: 190px;
+      right: -50px; top: -50px;
+      background: var(--accent-2);
+    }
+    .hero-card::after {
+      width: 150px; height: 150px;
+      left: -30px; bottom: -35px;
+      background: var(--accent);
+    }
+
+    .headset {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 370px);
+      aspect-ratio: 1.25 / 1;
+      margin: 3.5rem auto 1.8rem;
+      border-radius: 46% 46% 38% 38% / 42% 42% 48% 48%;
+      background: linear-gradient(145deg, #f7f8fa, #9ba8b7);
+      box-shadow: inset 0 -18px 34px rgba(0,0,0,.2), 0 32px 55px rgba(0,0,0,.35);
+      transform: rotate(-4deg);
+    }
+    .headset::before, .headset::after {
+      content: "";
+      position: absolute;
+      top: 42%;
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      background: #111927;
+      box-shadow: inset 0 0 0 7px #2c3b4e;
+    }
+    .headset::before { left: 18%; }
+    .headset::after { right: 18%; }
+    .strap {
+      position: absolute;
+      width: 66%;
+      height: 28%;
+      left: 17%;
+      top: -17%;
+      border: 22px solid #d8dde3;
+      border-bottom: 0;
+      border-radius: 90px 90px 0 0;
+      opacity: .85;
+    }
+
+    .mini-label {
+      position: relative;
+      z-index: 2;
+      width: fit-content;
+      margin: auto;
+      padding: .7rem 1rem;
+      border-radius: 999px;
+      color: #07111f;
+      background: var(--accent);
+      font-weight: 900;
+      transform: rotate(2deg);
+    }
+
+    section {
+      max-width: var(--max);
+      margin: auto;
+      padding: 5.5rem 1.2rem;
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      letter-spacing: -.04em;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+    .card {
+      padding: 1.6rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    }
+
+    .card .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(245,197,66,.14);
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
+    }
+
+    .card h3 { font-size: 1.25rem; margin-bottom: .55rem; }
+    .card p { color: var(--muted); margin: 0; }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      counter-reset: steps;
+    }
+
+    .step {
+      position: relative;
+      min-height: 210px;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+    }
+
+    .step::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #111;
+      font-weight: 900;
+      margin-bottom: 2rem;
+    }
+
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -1.45rem;
+      top: 44%;
+      z-index: 2;
+      color: var(--accent);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .quote {
+      padding: 3rem;
+      border-radius: 30px;
+      background: var(--accent);
+      color: #111;
+      font-size: clamp(1.65rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -.035em;
+      line-height: 1.18;
+      box-shadow: var(--shadow);
+    }
+
+    .departments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      border-radius: 999px;
+      padding: .7rem 1rem;
+      color: #dce6f2;
+      font-weight: 750;
+    }
+
+    .talk-card {
+      background: linear-gradient(145deg, rgba(105,183,255,.12), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: clamp(1.6rem, 4vw, 3rem);
+      display: grid;
+      grid-template-columns: .35fr .65fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .talk-card ol {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 1.1rem;
+    }
+    .talk-card li { margin-bottom: .85rem; }
+    .talk-card strong { color: var(--accent); }
+
+    footer {
+      max-width: var(--max);
+      margin: auto;
+      padding: 2rem 1.2rem 4rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .presentation .nav,
+    .presentation footer,
+    .presentation .hide-in-presentation {
+      display: none;
+    }
+
+    .presentation section,
+    .presentation .hero {
+      min-height: 100vh;
+      display: grid;
+      align-content: center;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .presentation .hero {
+      grid-template-columns: 1.1fr .9fr;
+    }
+
+
+
+    body.presentation {
+      overflow: hidden;
+      scroll-snap-type: y mandatory;
+    }
+
+    .presentation main {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .presentation .slide {
+      min-height: 100vh;
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+    }
+
+    .slide-controls {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(7,17,31,.88);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .slide-controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .slide-controls button:hover,
+    .slide-controls button:focus-visible {
+      background: var(--accent);
+      color: #111;
+      outline: none;
+    }
+
+    .slide-counter {
+      min-width: 72px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slide-dots {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 4.65rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      max-width: min(80vw, 420px);
+      padding: .55rem .75rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(7,17,31,.88);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .slide-dots .dot {
+      flex: none;
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2px solid var(--muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .slide-dots .dot:hover,
+    .slide-dots .dot:focus-visible {
+      border-color: var(--accent-2);
+      outline: none;
+    }
+
+    .slide-dots .dot.active {
+      width: 14px;
+      height: 14px;
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .experience-card {
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .experience-visual {
+      position: relative;
+      min-height: 250px;
+      overflow: hidden;
+      background: #10253f;
+    }
+
+    .experience-copy { padding: 1.35rem; }
+    .experience-copy h3 { margin-bottom: .45rem; }
+    .experience-copy p { color: var(--muted); margin: 0; }
+
+    .world-scene {
+      background:
+        linear-gradient(to bottom, #79b9e8 0 54%, #d8ba74 54% 67%, #37734e 67%);
+    }
+    .world-scene::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 30%;
+      width: 170px; height: 170px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 55px rgba(255,255,255,.55);
+    }
+    .world-scene::after {
+      content: "360° EXPLORE";
+      position: absolute;
+      left: 50%; bottom: 1rem;
+      transform: translateX(-50%);
+      padding: .55rem .8rem;
+      border-radius: 999px;
+      background: rgba(7,17,31,.82);
+      color: white;
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: .78rem;
+    }
+
+    .rhythm-scene {
+      background:
+        linear-gradient(115deg, transparent 47%, rgba(105,183,255,.8) 48% 50%, transparent 51%),
+        linear-gradient(65deg, transparent 47%, rgba(245,197,66,.85) 48% 50%, transparent 51%),
+        radial-gradient(circle at 50% 90%, rgba(105,183,255,.34), transparent 38%),
+        #090d1a;
+    }
+    .cube {
+      position: absolute;
+      width: 64px; height: 64px;
+      border: 4px solid rgba(255,255,255,.7);
+      transform: rotate(12deg);
+      box-shadow: 0 0 26px currentColor;
+    }
+    .cube.one { left: 19%; top: 24%; color: var(--accent-2); background: rgba(105,183,255,.65); }
+    .cube.two { right: 18%; top: 43%; color: var(--accent); background: rgba(245,197,66,.65); transform: rotate(-10deg); }
+    .cube.three { left: 44%; bottom: 12%; color: var(--accent-2); background: rgba(105,183,255,.55); transform: rotate(4deg); }
+
+    .collab-scene {
+      background:
+        radial-gradient(circle at 50% 42%, rgba(245,197,66,.18), transparent 30%),
+        #10253f;
+    }
+    .avatar {
+      position: absolute;
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #f7f8fa, #8aa1b9);
+      border: 5px solid rgba(255,255,255,.65);
+    }
+    .avatar::after {
+      content: "";
+      position: absolute;
+      width: 112px; height: 64px;
+      left: 50%; top: 58px;
+      transform: translateX(-50%);
+      border-radius: 60px 60px 14px 14px;
+      background: rgba(105,183,255,.58);
+    }
+    .avatar.a { left: 12%; top: 80px; }
+    .avatar.b { left: 50%; top: 35px; transform: translateX(-50%); }
+    .avatar.c { right: 12%; top: 80px; }
+    .speech {
+      position: absolute;
+      width: 44px; height: 28px;
+      border-radius: 12px;
+      background: var(--accent);
+      top: 35px;
+    }
+    .speech.s1 { left: 31%; }
+    .speech.s2 { right: 31%; top: 58px; background: var(--accent-2); }
+
+    .visual-caption {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index: 2;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      background: rgba(7,17,31,.78);
+      color: white;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .talk-card { grid-template-columns: 1fr; }
+      .hero { padding-top: 4rem; }
+      .hero-card { min-height: 370px; }
+      .grid-3, .grid-5, .loop, .experience-grid { grid-template-columns: 1fr 1fr; }
+      .step:not(:last-child)::after { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .nav-inner { align-items: flex-start; }
+      .brand span:last-child { display: none; }
+      .grid-3, .grid-5, .loop, .experience-grid { grid-template-columns: 1fr; }
+      .hero-card { min-height: 320px; }
+      .headset { margin-top: 2rem; }
+      .quote { padding: 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-mark">XR</div>
+        <span>XR Lab Tour</span>
+      </div>
+      <div class="nav-actions">
+        <a class="btn" href="#tour-notes">Tour Notes</a>
+        <button class="btn btn-primary" id="presentBtn" type="button">Presentation Mode</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="hero slide">
+      <div>
+        <div class="eyebrow">Lone Star College–Tomball</div>
+        <h1>Explore.<br>Test.<br>Improve.</h1>
+        <p>
+          The XR Lab is a pilot program exploring how virtual and mixed reality can support
+          learning, engagement, and durable skills across the college.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#what-we-do">See What We Do</a>
+          <a class="btn" href="#tour-notes">Open the Cheat Sheet</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Stylized virtual reality headset illustration">
+        <div class="headset"><div class="strap"></div></div>
+        <div class="mini-label">Built for experimentation</div>
+      </div>
+    </header>
+
+    <section id="what-we-do" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">What we do</div>
+        <h2>We test what is already out there.</h2>
+        <p>
+          We use accessible and often free XR experiences, try them with students and faculty,
+          and learn where immersive technology genuinely adds value.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="icon">🧪</div>
+          <h3>Experiment</h3>
+          <p>Try applications, activities, room setups, and teaching approaches.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🎓</div>
+          <h3>Support Faculty</h3>
+          <p>Help instructors find experiences that fit their learning goals.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🥽</div>
+          <h3>Give Students Access</h3>
+          <p>Offer classes and open lab time so the equipment stays in people’s hands.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pilot" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">The pilot-program loop</div>
+        <h2>Throw spaghetti. Keep what sticks.</h2>
+        <p>
+          Not every app or idea works, and that is useful information. The lab improves by
+          testing, observing, gathering feedback, and adjusting.
+        </p>
+      </div>
+
+      <div class="loop">
+        <article class="step">
+          <h3>Try</h3>
+          <p>Choose an experience or teaching idea worth exploring.</p>
+        </article>
+        <article class="step">
+          <h3>Observe</h3>
+          <p>See how students and faculty actually use it.</p>
+        </article>
+        <article class="step">
+          <h3>Learn</h3>
+          <p>Identify what worked, what failed, and what created value.</p>
+        </article>
+        <article class="step">
+          <h3>Improve</h3>
+          <p>Refine the process, keep the useful pieces, and try again.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <section id="examples" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">What it can feel like</div>
+        <h2>Immersive experiences, not just screens.</h2>
+        <p>
+          XR can place students inside a location, give them an active challenge, or put them
+          into a shared space where communication and decisions matter.
+        </p>
+      </div>
+
+      <div class="experience-grid">
+        <article class="experience-card">
+          <div class="experience-visual world-scene">
+            <span class="visual-caption">Explore</span>
+          </div>
+          <div class="experience-copy">
+            <h3>Visit places</h3>
+            <p>Walk through historical sites, environments, and locations that are difficult to reach in person.</p>
+          </div>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-visual rhythm-scene">
+            <span class="visual-caption">Engage</span>
+            <span class="cube one"></span>
+            <span class="cube two"></span>
+            <span class="cube three"></span>
+          </div>
+          <div class="experience-copy">
+            <h3>Learn by doing</h3>
+            <p>Interactive challenges get people moving, reacting, practicing, and becoming comfortable with VR.</p>
+          </div>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-visual collab-scene">
+            <span class="visual-caption">Collaborate</span>
+            <span class="avatar a"></span>
+            <span class="avatar b"></span>
+            <span class="avatar c"></span>
+            <span class="speech s1"></span>
+            <span class="speech s2"></span>
+          </div>
+          <div class="experience-copy">
+            <h3>Work together</h3>
+            <p>Shared activities can strengthen communication, teamwork, adaptability, and problem solving.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">Why it matters</div>
+        <h2>Building durable skills.</h2>
+        <p>
+          The technology will change. These human skills remain useful across courses,
+          careers, and whatever strange workplace software appears next.
+        </p>
+      </div>
+
+      <div class="grid grid-5">
+        <article class="card">
+          <div class="icon">💬</div>
+          <h3>Communication</h3>
+        </article>
+        <article class="card">
+          <div class="icon">🤝</div>
+          <h3>Teamwork</h3>
+        </article>
+        <article class="card">
+          <div class="icon">🧠</div>
+          <h3>Critical Thinking</h3>
+        </article>
+        <article class="card">
+          <div class="icon">🧩</div>
+          <h3>Problem Solving</h3>
+        </article>
+        <article class="card">
+          <div class="icon">🔄</div>
+          <h3>Adaptability</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="quote">
+        “We are less interested in teaching VR than we are in using VR to help people learn,
+        collaborate, and solve problems.”
+      </div>
+    </section>
+
+    <section id="classes" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">Across the college</div>
+        <h2>One lab, many subjects.</h2>
+        <p>
+          Each department uses XR differently. The lab helps connect the technology to the
+          actual goal of the course rather than forcing every class into the same shiny headset-shaped box.
+        </p>
+      </div>
+
+      <div class="departments" aria-label="Departments supported">
+        <span class="pill">History</span>
+        <span class="pill">English</span>
+        <span class="pill">Business</span>
+        <span class="pill">Occupational Therapy</span>
+        <span class="pill">Environmental Science</span>
+        <span class="pill">Speech</span>
+        <span class="pill">Art</span>
+        <span class="pill">Career Exploration</span>
+        <span class="pill">Open Lab</span>
+      </div>
+    </section>
+
+    <section id="tour-notes" class="slide">
+      <div class="section-heading">
+        <div class="eyebrow">Tour cheat sheet</div>
+        <h2>The version you can actually remember.</h2>
+      </div>
+
+      <div class="talk-card">
+        <div>
+          <h3>15-second answer</h3>
+          <p>
+            “We’re a pilot program for educational XR. We test apps and teaching ideas,
+            figure out what works, support faculty, and give students opportunities to build
+            durable skills.”
+          </p>
+        </div>
+        <ol>
+          <li><strong>Welcome:</strong> XR and mixed reality for education.</li>
+          <li><strong>Pilot program:</strong> We constantly test and improve.</li>
+          <li><strong>What we use:</strong> Mostly existing, accessible, and free experiences.</li>
+          <li><strong>Who we support:</strong> Students, faculty, and many departments.</li>
+          <li><strong>Why it matters:</strong> Communication, teamwork, critical thinking, problem solving, and adaptability.</li>
+          <li><strong>The goal:</strong> Keep the equipment in use instead of collecting dust.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>XR Lab • Lone Star College–Tomball</strong><br>
+    A working pilot program that keeps learning, changing, and occasionally cleaning spaghetti off the wall.
+  </footer>
+
+  <div class="slide-dots" id="slideDots" aria-label="Go to slide"></div>
+
+  <div class="slide-controls" aria-label="Slideshow controls">
+    <button id="fullscreenBtn" type="button" aria-label="Enter fullscreen">⛶</button>
+    <button id="prevSlide" type="button" aria-label="Previous slide">←</button>
+    <div class="slide-counter" id="slideCounter" aria-live="polite">1 / 8</div>
+    <button id="nextSlide" type="button" aria-label="Next slide">→</button>
+  </div>
+
+  <script>
+    const presentBtn = document.getElementById('presentBtn');
+    const main = document.getElementById('main');
+    const slides = [...document.querySelectorAll('.slide')];
+    const prevSlide = document.getElementById('prevSlide');
+    const nextSlide = document.getElementById('nextSlide');
+    const slideCounter = document.getElementById('slideCounter');
+    const slideDots = document.getElementById('slideDots');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    let currentSlide = 0;
+
+    const dots = slides.map((slide, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot';
+      const heading = slide.querySelector('h1, h2');
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}${heading ? ': ' + heading.textContent.trim() : ''}`);
+      dot.addEventListener('click', () => showSlide(index));
+      slideDots.appendChild(dot);
+      return dot;
+    });
+
+    function updateCounter() {
+      slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        const active = index === currentSlide;
+        dot.classList.toggle('active', active);
+        if (active) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    function showSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+      slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      updateCounter();
+      updateDots();
+    }
+
+    function isFullscreen() {
+      return !!document.fullscreenElement;
+    }
+
+    function updateFullscreenBtn() {
+      const active = isFullscreen();
+      fullscreenBtn.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen');
+    }
+
+    function toggleFullscreen() {
+      if (!document.documentElement.requestFullscreen) return;
+      if (isFullscreen()) {
+        document.exitFullscreen().catch(() => {});
+      } else {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    }
+
+    if (!document.documentElement.requestFullscreen) {
+      fullscreenBtn.hidden = true;
+    }
+
+    function setPresentation(active) {
+      document.body.classList.toggle('presentation', active);
+      presentBtn.textContent = active ? 'Exit Presentation' : 'Presentation Mode';
+      if (active) showSlide(0);
+    }
+
+    presentBtn.addEventListener('click', () => {
+      setPresentation(!document.body.classList.contains('presentation'));
+    });
+
+    prevSlide.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextSlide.addEventListener('click', () => showSlide(currentSlide + 1));
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', updateFullscreenBtn);
+
+    main.addEventListener('scroll', () => {
+      if (!document.body.classList.contains('presentation')) return;
+      const mainTop = main.getBoundingClientRect().top;
+      let nearest = 0;
+      let nearestDistance = Infinity;
+      slides.forEach((slide, index) => {
+        const distance = Math.abs(slide.getBoundingClientRect().top - mainTop);
+        if (distance < nearestDistance) {
+          nearest = index;
+          nearestDistance = distance;
+        }
+      });
+      currentSlide = nearest;
+      updateCounter();
+      updateDots();
+    }, { passive: true });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key.toLowerCase() === 'p') {
+        setPresentation(!document.body.classList.contains('presentation'));
+      }
+      if (event.key.toLowerCase() === 'f') toggleFullscreen();
+      if (event.key === 'Escape') setPresentation(false);
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        showSlide(currentSlide + 1);
+      }
+      if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(currentSlide - 1);
+      }
+      if (event.key === 'Home') showSlide(0);
+      if (event.key === 'End') showSlide(slides.length - 1);
+    });
+
+    updateCounter();
+    updateDots();
+    setPresentation(true);
+  </script>
+</body>
+</html>
