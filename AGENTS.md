@@ -77,6 +77,10 @@ The site must continue to open directly in presentation mode unless the owner re
 - CSS illustrations are acceptable and useful for offline operation.
 - When adding real lab photographs, use local optimized images and meaningful alt text.
 - Do not use unlicensed images or hotlink third-party assets.
+- When an `<img>` references a local file that may not exist yet (e.g. a photo slot awaiting a
+  real file), give it an `onerror` handler that adds a `missing-photo` class to its parent and
+  removes the broken `<img>`, so the slide falls back to a visible dashed placeholder instead of
+  a broken-image icon. See the "What we use" app slides (`.app-visual`) for the pattern.
 
 ## Accessibility requirements
 

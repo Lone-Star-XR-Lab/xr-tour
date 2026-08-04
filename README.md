@@ -80,11 +80,17 @@ The main design tokens are at the beginning of the stylesheet:
 
 ### Add visual examples
 
-The current examples use CSS illustrations so the presentation works offline and does not depend on remote image hosting. New photographs or screenshots can be added to the project folder and referenced with a relative path:
+The "What we use" slides each show a real photo of one experience in the lab's library, stored
+locally in `images/` and referenced with a relative path so the slideshow stays offline-friendly:
 
 ```html
 <img src="images/example.jpg" alt="Student using a VR headset in the XR Lab">
 ```
+
+If a referenced file is missing, that slide shows a dashed "Add photo" placeholder instead of a
+broken image, so it's obvious what still needs to be filled in — see `images/README.md` for the
+current list of expected filenames. Other slides still use CSS illustrations where a photo isn't
+the point (e.g. the headset graphic on the opening slide).
 
 Keep image file sizes reasonable so the slideshow loads quickly on campus computers.
 

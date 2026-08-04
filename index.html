@@ -515,115 +515,75 @@
       background: var(--accent);
     }
 
-    .experience-grid {
+    .app-slide {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      grid-template-columns: .95fr 1.05fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: center;
     }
 
-    .experience-card {
-      min-height: 420px;
+    .app-copy .eyebrow { margin-bottom: .8rem; }
+
+    .app-copy h2 {
+      font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+      margin-bottom: .9rem;
+    }
+
+    .app-dept {
+      display: inline-block;
+      margin-bottom: 1.1rem;
+      padding: .5rem .9rem;
+      border-radius: 999px;
+      background: rgba(245,197,66,.14);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: .8rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .app-copy p:last-child {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+      max-width: 620px;
+      margin: 0;
+    }
+
+    .app-visual {
       position: relative;
+      width: 100%;
+      height: min(56vh, 520px);
+      border-radius: 28px;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--card);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .experience-visual {
-      position: relative;
-      min-height: 250px;
-      overflow: hidden;
+      box-shadow: var(--shadow);
       background: #10253f;
     }
 
-    .experience-copy { padding: 1.35rem; }
-    .experience-copy h3 { margin-bottom: .45rem; }
-    .experience-copy p { color: var(--muted); margin: 0; }
-
-    .world-scene {
-      background:
-        linear-gradient(to bottom, #79b9e8 0 54%, #d8ba74 54% 67%, #37734e 67%);
-    }
-    .world-scene::before {
-      content: "";
-      position: absolute;
-      left: 50%; top: 30%;
-      width: 170px; height: 170px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 0 55px rgba(255,255,255,.55);
-    }
-    .world-scene::after {
-      content: "360° EXPLORE";
-      position: absolute;
-      left: 50%; bottom: 1rem;
-      transform: translateX(-50%);
-      padding: .55rem .8rem;
-      border-radius: 999px;
-      background: rgba(7,17,31,.82);
-      color: white;
-      font-weight: 900;
-      letter-spacing: .08em;
-      font-size: .78rem;
+    .app-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .rhythm-scene {
-      background:
-        linear-gradient(115deg, transparent 47%, rgba(105,183,255,.8) 48% 50%, transparent 51%),
-        linear-gradient(65deg, transparent 47%, rgba(245,197,66,.85) 48% 50%, transparent 51%),
-        radial-gradient(circle at 50% 90%, rgba(105,183,255,.34), transparent 38%),
-        #090d1a;
+    .app-visual.missing-photo {
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      border: 2px dashed var(--line);
     }
-    .cube {
-      position: absolute;
-      width: 64px; height: 64px;
-      border: 4px solid rgba(255,255,255,.7);
-      transform: rotate(12deg);
-      box-shadow: 0 0 26px currentColor;
-    }
-    .cube.one { left: 19%; top: 24%; color: var(--accent-2); background: rgba(105,183,255,.65); }
-    .cube.two { right: 18%; top: 43%; color: var(--accent); background: rgba(245,197,66,.65); transform: rotate(-10deg); }
-    .cube.three { left: 44%; bottom: 12%; color: var(--accent-2); background: rgba(105,183,255,.55); transform: rotate(4deg); }
 
-    .collab-scene {
-      background:
-        radial-gradient(circle at 50% 42%, rgba(245,197,66,.18), transparent 30%),
-        #10253f;
+    .app-visual.missing-photo::before {
+      content: "Add photo:\A" attr(data-filename);
+      white-space: pre-line;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: .9rem;
     }
-    .avatar {
-      position: absolute;
-      width: 76px; height: 76px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #f7f8fa, #8aa1b9);
-      border: 5px solid rgba(255,255,255,.65);
-    }
-    .avatar::after {
-      content: "";
-      position: absolute;
-      width: 112px; height: 64px;
-      left: 50%; top: 58px;
-      transform: translateX(-50%);
-      border-radius: 60px 60px 14px 14px;
-      background: rgba(105,183,255,.58);
-    }
-    .avatar.a { left: 12%; top: 80px; }
-    .avatar.b { left: 50%; top: 35px; transform: translateX(-50%); }
-    .avatar.c { right: 12%; top: 80px; }
-    .speech {
-      position: absolute;
-      width: 44px; height: 28px;
-      border-radius: 12px;
-      background: var(--accent);
-      top: 35px;
-    }
-    .speech.s1 { left: 31%; }
-    .speech.s2 { right: 31%; top: 58px; background: var(--accent-2); }
 
-    .visual-caption {
+    .app-visual-tag {
       position: absolute;
       left: 1rem;
       top: 1rem;
@@ -639,17 +599,18 @@
     }
 
     @media (max-width: 900px) {
-      .hero, .talk-card { grid-template-columns: 1fr; }
+      .hero, .talk-card, .app-slide { grid-template-columns: 1fr; }
       .hero { padding-top: 4rem; }
       .hero-card { min-height: 370px; }
-      .grid-3, .grid-5, .loop, .experience-grid { grid-template-columns: 1fr 1fr; }
+      .app-visual { height: min(42vh, 380px); order: -1; }
+      .grid-3, .grid-5, .loop { grid-template-columns: 1fr 1fr; }
       .step:not(:last-child)::after { display: none; }
     }
 
     @media (max-width: 620px) {
       .nav-inner { align-items: flex-start; }
       .brand span:last-child { display: none; }
-      .grid-3, .grid-5, .loop, .experience-grid { grid-template-columns: 1fr; }
+      .grid-3, .grid-5, .loop { grid-template-columns: 1fr; }
       .hero-card { min-height: 320px; }
       .headset { margin-top: 2rem; }
       .quote { padding: 2rem; }
@@ -758,54 +719,87 @@
     </section>
 
 
-    <section id="examples" class="slide">
-      <div class="section-heading">
-        <div class="eyebrow">What it can feel like</div>
-        <h2>Immersive experiences, not just screens.</h2>
-        <p>
-          XR can place students inside a location, give them an active challenge, or put them
-          into a shared space where communication and decisions matter.
-        </p>
+    <section id="app-anne-frank" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>Anne Frank House VR</h2>
+        <div class="app-dept">History &amp; English</div>
+        <p>Accompanies reading the diary &mdash; shows the living conditions the Frank family experienced while in hiding.</p>
       </div>
+      <div class="app-visual" data-filename="images/anne-frank-house-vr.jpg">
+        <img src="images/anne-frank-house-vr.jpg" alt="Anne Frank House VR experience" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">VR</span>
+      </div>
+    </section>
 
-      <div class="experience-grid">
-        <article class="experience-card">
-          <div class="experience-visual world-scene">
-            <span class="visual-caption">Explore</span>
-          </div>
-          <div class="experience-copy">
-            <h3>Visit places</h3>
-            <p>Walk through historical sites, environments, and locations that are difficult to reach in person.</p>
-          </div>
-        </article>
+    <section id="app-traveling-while-black" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>Traveling While Black</h2>
+        <div class="app-dept">Civic Engagement &amp; Speech</div>
+        <p>Helps students build empathy through real accounts of Black travel experiences in America.</p>
+      </div>
+      <div class="app-visual" data-filename="images/traveling-while-black.jpg">
+        <img src="images/traveling-while-black.jpg" alt="Traveling While Black VR experience" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">VR</span>
+      </div>
+    </section>
 
-        <article class="experience-card">
-          <div class="experience-visual rhythm-scene">
-            <span class="visual-caption">Engage</span>
-            <span class="cube one"></span>
-            <span class="cube two"></span>
-            <span class="cube three"></span>
-          </div>
-          <div class="experience-copy">
-            <h3>Learn by doing</h3>
-            <p>Interactive challenges get people moving, reacting, practicing, and becoming comfortable with VR.</p>
-          </div>
-        </article>
+    <section id="app-wander" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>Wander</h2>
+        <div class="app-dept">Environmental Science</div>
+        <p>Compares land-use change worldwide &mdash; a forest turned to concrete, a trash mountain in India, dense development next to open land just a turn away.</p>
+      </div>
+      <div class="app-visual" data-filename="images/wander.jpg">
+        <img src="images/wander.jpg" alt="Wander VR experience" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">VR</span>
+      </div>
+    </section>
 
-        <article class="experience-card">
-          <div class="experience-visual collab-scene">
-            <span class="visual-caption">Collaborate</span>
-            <span class="avatar a"></span>
-            <span class="avatar b"></span>
-            <span class="avatar c"></span>
-            <span class="speech s1"></span>
-            <span class="speech s2"></span>
-          </div>
-          <div class="experience-copy">
-            <h3>Work together</h3>
-            <p>Shared activities can strengthen communication, teamwork, adaptability, and problem solving.</p>
-          </div>
-        </article>
+    <section id="app-on-the-ice" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>Hatched: On the Ice</h2>
+        <div class="app-dept">Environmental Science</div>
+        <p>Shows what it's like to be a scientist in Antarctica, tracking and learning about the penguin lifecycle.</p>
+      </div>
+      <div class="app-visual" data-filename="images/on-the-ice-hatched.webp">
+        <img src="images/on-the-ice-hatched.webp" alt="Hatched: On the Ice VR experience" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">VR</span>
+      </div>
+    </section>
+
+    <section id="app-open-brush" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>Open Brush</h2>
+        <div class="app-dept">Art</div>
+        <p>Students build portfolio pieces in VR, which viewers can then walk through or view at full scale.</p>
+      </div>
+      <div class="app-visual" data-filename="images/open-brush.jpg">
+        <img src="images/open-brush.jpg" alt="Open Brush VR experience" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">VR</span>
+      </div>
+    </section>
+
+    <section id="app-youtube-360" class="slide app-slide">
+      <div class="app-copy">
+        <div class="eyebrow">What we use</div>
+        <h2>360&deg; YouTube Experiences</h2>
+        <div class="app-dept">Various Classes</div>
+        <p>Free 360&deg; videos viewed through a headset &mdash; a low-cost way to explore places and events.</p>
+      </div>
+      <div class="app-visual" data-filename="images/youtube-360.jpg">
+        <img src="images/youtube-360.jpg" alt="A visitor watching a 360-degree YouTube video in a headset" loading="lazy"
+             onerror="this.parentElement.classList.add('missing-photo'); this.remove();">
+        <span class="app-visual-tag">360&deg; Video</span>
       </div>
     </section>
 
