@@ -8,10 +8,36 @@ placeholder instead of a broken image.
 |---|---|
 | `anne-frank-house-vr.jpg` | Anne Frank House VR card |
 | `traveling-while-black.jpg` | Traveling While Black card |
-| `wander.jpg` | Wander card |
+| `wander.webp` | Wander card |
 | `on-the-ice-hatched.webp` | Hatched: On the Ice card |
 | `open-brush.jpg` | Open Brush card |
 | `youtube-360.jpg` | 360° YouTube Experiences card (not yet added) |
+
+## App demo clips
+
+Each app card advances in two steps: the still photo above shows first, and
+the next click/arrow-key swaps in a short looping GIF before a second
+click/arrow-key moves on to the next card. Drop a GIF using the filenames
+below to enable it — until the file exists, that click shows a dashed
+"Add gif/video" placeholder instead of a broken clip.
+
+| Filename | Used for |
+|---|---|
+| `anne-frank-example.gif` | Anne Frank House VR card (added) |
+| `traveling-while-black-example.gif` | Traveling While Black card (added) |
+| `wander-example.gif` | Wander card (added) |
+| `on-the-ice-hatched-example.gif` | Hatched: On the Ice card (added) |
+| `tilt-brush-example.gif` | Open Brush card (added) |
+| `youtube-360-example.gif` | 360° YouTube Experiences card (not yet added) |
+
+Keep clips short (5–10s) and small — a big GIF will stall the slideshow on
+campus computers. The five added so far run 3.5MB–17MB; the two on the high
+end (`on-the-ice-hatched-example.gif` ~17MB, `traveling-while-black-example.gif`
+~17MB) are worth shrinking (fewer frames, lower resolution, or a GIF
+compressor) before this goes out for a live tour. If a clip has audio you
+care about or a compressed GIF still looks rough, ask to swap that slide's
+tag to a muted `<video>` instead — usually much smaller than an equivalent
+GIF for the same clip.
 
 ## Guidelines
 

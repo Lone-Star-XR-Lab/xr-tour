@@ -635,21 +635,32 @@ body.presentation {
   background: #10253f;
 }
 
-.app-visual img {
+.app-media-frame {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.app-media-frame.is-active {
+  display: block;
+}
+
+.app-media-frame img,
+.app-media-frame video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.app-visual.missing-photo {
+.app-media-frame.is-active.missing-photo {
   display: grid;
   place-items: center;
   padding: 1.5rem;
   border: 2px dashed var(--line);
 }
 
-.app-visual.missing-photo::before {
+.app-media-frame.is-active.missing-photo::before {
   content: "Add photo:\A" attr(data-filename);
   white-space: pre-line;
   text-align: center;
@@ -657,6 +668,7 @@ body.presentation {
   font-weight: 700;
   font-size: .9rem;
 }
+
 
 .app-visual-tag {
   position: absolute;

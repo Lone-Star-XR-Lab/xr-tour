@@ -77,10 +77,13 @@ The site must continue to open directly in presentation mode unless the owner re
 - CSS illustrations are acceptable and useful for offline operation.
 - When adding real lab photographs, use local optimized images and meaningful alt text.
 - Do not use unlicensed images or hotlink third-party assets.
-- When an `<img>` references a local file that may not exist yet (e.g. a photo slot awaiting a
-  real file), give it an `onerror` handler that adds a `missing-photo` class to its parent and
-  removes the broken `<img>`, so the slide falls back to a visible dashed placeholder instead of
-  a broken-image icon. See the "What we use" app slides (`.app-visual`) for the pattern.
+- When an `<img>` or `<video>` references a local file that may not exist yet (e.g. a photo or
+  clip slot awaiting a real file), give it an `onerror` handler that adds a `missing-photo` class
+  to its parent and removes the broken element, so it falls back to a visible dashed placeholder
+  instead of a broken-image icon. See the "What we use" app slides (`.app-visual` and its
+  `.app-media-frame` children) for the pattern. Each app slide has two stacked frames — a photo
+  (`.app-media-frame.is-active` by default) and a demo clip (`.app-media-frame.app-media-secondary`)
+  — and the next click/arrow-key reveals the second frame before advancing to the next slide.
 
 ## Accessibility requirements
 

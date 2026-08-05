@@ -7,6 +7,31 @@ const slideCounter = document.getElementById('slideCounter');
 const slideDots = document.getElementById('slideDots');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 let currentSlide = 0;
+let currentView = 0;
+
+function getMediaFrames(slide) {
+  return [...slide.querySelectorAll('.app-media-frame')];
+}
+
+function setActiveFrame(slide, index) {
+  getMediaFrames(slide).forEach((frame, i) => {
+    const active = i === index;
+    frame.classList.toggle('is-active', active);
+    const video = frame.querySelector('video');
+    if (!video) return;
+    if (active) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}
+
+function resetSlideView(slide) {
+  currentView = 0;
+  if (slide) setActiveFrame(slide, 0);
+}
 
 const dots = slides.map((slide, index) => {
   const dot = document.createElement('button');
@@ -34,9 +59,25 @@ function updateDots() {
 
 function showSlide(index) {
   currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+  resetSlideView(slides[currentSlide]);
   slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateCounter();
   updateDots();
+}
+
+function goNext() {
+  const slide = slides[currentSlide];
+  const frames = getMediaFrames(slide);
+  if (currentView < frames.length - 1) {
+    currentView += 1;
+    setActiveFrame(slide, currentView);
+    return;
+  }
+  showSlide(currentSlide + 1);
+}
+
+function goPrev() {
+  showSlide(currentSlide - 1);
 }
 
 function isFullscreen() {
@@ -71,8 +112,8 @@ presentBtn.addEventListener('click', () => {
   setPresentation(!document.body.classList.contains('presentation'));
 });
 
-prevSlide.addEventListener('click', () => showSlide(currentSlide - 1));
-nextSlide.addEventListener('click', () => showSlide(currentSlide + 1));
+prevSlide.addEventListener('click', () => goPrev());
+nextSlide.addEventListener('click', () => goNext());
 fullscreenBtn.addEventListener('click', toggleFullscreen);
 document.addEventListener('fullscreenchange', updateFullscreenBtn);
 
@@ -88,7 +129,10 @@ main.addEventListener('scroll', () => {
       nearestDistance = distance;
     }
   });
-  currentSlide = nearest;
+  if (nearest !== currentSlide) {
+    currentSlide = nearest;
+    resetSlideView(slides[currentSlide]);
+  }
   updateCounter();
   updateDots();
 }, { passive: true });
@@ -101,11 +145,11 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setPresentation(false);
   if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
     event.preventDefault();
-    showSlide(currentSlide + 1);
+    goNext();
   }
   if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
     event.preventDefault();
-    showSlide(currentSlide - 1);
+    goPrev();
   }
   if (event.key === 'Home') showSlide(0);
   if (event.key === 'End') showSlide(slides.length - 1);
