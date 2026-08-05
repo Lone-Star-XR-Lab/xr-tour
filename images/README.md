@@ -12,6 +12,7 @@ placeholder instead of a broken image.
 | `on-the-ice-hatched.webp` | Hatched: On the Ice card |
 | `open-brush.jpg` | Open Brush card |
 | `youtube-360.jpg` | 360° YouTube Experiences card (not yet added) |
+| `human-anatomy-vr.jpg` | Human Anatomy VR card (not yet added) |
 
 ## App demo clips
 
@@ -29,6 +30,7 @@ below to enable it — until the file exists, that click shows a dashed
 | `on-the-ice-hatched-example.gif` | Hatched: On the Ice card (added) |
 | `tilt-brush-example.gif` | Open Brush card (added) |
 | `youtube-360-example.gif` | 360° YouTube Experiences card (not yet added) |
+| `human-anatomy-vr-example.gif` | Human Anatomy VR card (not yet added) |
 
 Keep clips short (5–10s) and small — a big GIF will stall the slideshow on
 campus computers. The five added so far run 3.5MB–17MB; the two on the high

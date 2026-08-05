@@ -235,6 +235,15 @@ section {
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-5 { grid-template-columns: repeat(5, 1fr); }
 
+.grid-5 .card {
+  text-align: center;
+}
+
+.grid-5 .card .icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .card {
   padding: 1.6rem;
   border: 1px solid var(--line);
@@ -310,6 +319,57 @@ section {
   box-shadow: var(--shadow);
 }
 
+.feedback-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.feedback-column {
+  padding: 1.8rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent-2);
+  background: var(--card);
+}
+
+.feedback-improve {
+  border-top-color: var(--accent);
+}
+
+.feedback-column h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-quote {
+  margin: 0 0 .65rem;
+  padding: .2rem 0 .2rem 1.1rem;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.feedback-quote:last-child {
+  margin-bottom: 0;
+}
+
+.feedback-quote.is-placeholder {
+  padding: 1rem 1.2rem;
+  border: 2px dashed var(--line);
+  border-radius: 14px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: .95rem;
+  text-align: center;
+}
+
+.feedback-source {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
 .departments {
   display: flex;
   flex-wrap: wrap;
@@ -359,7 +419,7 @@ footer {
   z-index: 100;
   display: none;
   align-items: center;
-  padding: .5rem .9rem;
+  padding: .65rem 1.1rem;
   border-radius: 999px;
   background: rgba(7,17,31,.88);
   backdrop-filter: blur(16px);
@@ -367,7 +427,7 @@ footer {
 }
 
 .presentation-mark img {
-  height: 68px;
+  height: 96px;
   width: auto;
   display: block;
 }
@@ -424,35 +484,47 @@ footer {
 }
 
 .presentation .card {
-  padding: 2.6rem;
+  padding: 2.8rem;
 }
 
 .presentation .card .icon {
-  width: 76px;
-  height: 76px;
-  font-size: 2.1rem;
-  margin-bottom: 1.4rem;
+  width: 104px;
+  height: 104px;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .presentation .card h3 {
-  font-size: 1.85rem;
+  font-size: 2.15rem;
 }
 
 .presentation .card p {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .presentation .step {
-  min-height: 280px;
+  min-height: 300px;
   padding: 2.4rem;
 }
 
+.presentation .step::before {
+  width: 60px;
+  height: 60px;
+  font-size: 1.6rem;
+  margin-bottom: 2.2rem;
+}
+
+.presentation .step:not(:last-child)::after {
+  right: -1.7rem;
+  font-size: 3rem;
+}
+
 .presentation .step h3 {
-  font-size: 1.85rem;
+  font-size: 2.15rem;
 }
 
 .presentation .step p {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .presentation .quote {
@@ -463,6 +535,27 @@ footer {
 .presentation .pill {
   font-size: 1.2rem;
   padding: 1rem 1.5rem;
+}
+
+.presentation .feedback-columns {
+  gap: 1.5rem;
+}
+
+.presentation .feedback-column {
+  padding: 1.7rem 2.2rem;
+}
+
+.presentation .feedback-column h3 {
+  font-size: 1.6rem;
+  margin-bottom: .7rem;
+}
+
+.presentation .feedback-quote {
+  font-size: 1.15rem;
+}
+
+.presentation .feedback-source {
+  font-size: 1rem;
 }
 
 .presentation .app-copy h2 {
@@ -535,6 +628,11 @@ body.presentation {
   background: var(--accent);
   color: #111;
   outline: none;
+}
+
+.slide-controls button.active {
+  background: var(--accent);
+  color: #111;
 }
 
 .slide-counter {
@@ -686,7 +784,7 @@ body.presentation {
 }
 
 @media (max-width: 900px) {
-  .hero, .app-slide { grid-template-columns: 1fr; }
+  .hero, .app-slide, .feedback-columns { grid-template-columns: 1fr; }
   .hero { padding-top: 4rem; }
   .hero-card { min-height: 370px; }
   .app-visual { max-height: min(48vh, 420px); order: -1; }
@@ -697,8 +795,8 @@ body.presentation {
 @media (max-width: 620px) {
   .nav-inner { align-items: flex-start; }
   .brand-logo { height: 34px; }
-  .presentation-mark { left: .75rem; top: .75rem; padding: .45rem .7rem; }
-  .presentation-mark img { height: 42px; }
+  .presentation-mark { left: .75rem; top: .75rem; padding: .5rem .8rem; }
+  .presentation-mark img { height: 56px; }
   .slide-dots { bottom: 4.65rem; max-width: min(88vw, 340px); }
   .grid-3, .grid-5, .loop { grid-template-columns: 1fr; }
   .hero-card { min-height: 320px; }

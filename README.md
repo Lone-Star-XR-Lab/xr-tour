@@ -27,9 +27,15 @@ The page automatically starts in slideshow mode. No installation, server, framew
 | Escape | Exit slideshow mode |
 | P | Toggle slideshow mode |
 | F | Toggle browser fullscreen |
+| A | Toggle auto-advance |
 | On-screen arrows | Previous or next slide |
 | On-screen dots | Jump to a specific slide |
 | On-screen fullscreen button | Toggle browser fullscreen |
+| On-screen play/pause button | Toggle auto-advance |
+
+On an app slide with a demo GIF, "next" reveals the clip first; a second
+"next" moves on to the following slide. Auto-advance does the same on a
+timer (9s per step) and loops back to the first slide after the last one.
 
 ## Project files
 

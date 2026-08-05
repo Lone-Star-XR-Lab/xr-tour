@@ -6,8 +6,12 @@ const nextSlide = document.getElementById('nextSlide');
 const slideCounter = document.getElementById('slideCounter');
 const slideDots = document.getElementById('slideDots');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
+const autoPlayBtn = document.getElementById('autoPlayBtn');
 let currentSlide = 0;
 let currentView = 0;
+let autoPlaying = false;
+let autoTimer = null;
+const AUTO_ADVANCE_MS = 9000;
 
 function getMediaFrames(slide) {
   return [...slide.querySelectorAll('.app-media-frame')];
@@ -63,21 +67,43 @@ function showSlide(index) {
   slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateCounter();
   updateDots();
+  if (autoPlaying) scheduleAutoTick();
 }
 
-function goNext() {
+function advance(loop) {
   const slide = slides[currentSlide];
   const frames = getMediaFrames(slide);
   if (currentView < frames.length - 1) {
     currentView += 1;
     setActiveFrame(slide, currentView);
+    if (autoPlaying) scheduleAutoTick();
     return;
   }
-  showSlide(currentSlide + 1);
+  const next = currentSlide + 1;
+  showSlide(loop ? next % slides.length : next);
+}
+
+function goNext() {
+  advance(false);
 }
 
 function goPrev() {
   showSlide(currentSlide - 1);
+}
+
+function scheduleAutoTick() {
+  clearTimeout(autoTimer);
+  if (!autoPlaying) return;
+  autoTimer = setTimeout(() => advance(true), AUTO_ADVANCE_MS);
+}
+
+function setAutoPlay(active) {
+  autoPlaying = active;
+  autoPlayBtn.classList.toggle('active', active);
+  autoPlayBtn.setAttribute('aria-label', active ? 'Pause auto-advance' : 'Start auto-advance');
+  autoPlayBtn.textContent = active ? '⏸' : '▶';
+  if (active) scheduleAutoTick();
+  else clearTimeout(autoTimer);
 }
 
 function isFullscreen() {
@@ -105,6 +131,7 @@ if (!document.documentElement.requestFullscreen) {
 function setPresentation(active) {
   document.body.classList.toggle('presentation', active);
   presentBtn.textContent = active ? 'Exit Presentation' : 'Presentation Mode';
+  if (!active) setAutoPlay(false);
   if (active) showSlide(0);
 }
 
@@ -114,6 +141,7 @@ presentBtn.addEventListener('click', () => {
 
 prevSlide.addEventListener('click', () => goPrev());
 nextSlide.addEventListener('click', () => goNext());
+autoPlayBtn.addEventListener('click', () => setAutoPlay(!autoPlaying));
 fullscreenBtn.addEventListener('click', toggleFullscreen);
 document.addEventListener('fullscreenchange', updateFullscreenBtn);
 
@@ -132,6 +160,7 @@ main.addEventListener('scroll', () => {
   if (nearest !== currentSlide) {
     currentSlide = nearest;
     resetSlideView(slides[currentSlide]);
+    if (autoPlaying) scheduleAutoTick();
   }
   updateCounter();
   updateDots();
@@ -142,6 +171,7 @@ document.addEventListener('keydown', (event) => {
     setPresentation(!document.body.classList.contains('presentation'));
   }
   if (event.key.toLowerCase() === 'f') toggleFullscreen();
+  if (event.key.toLowerCase() === 'a') setAutoPlay(!autoPlaying);
   if (event.key === 'Escape') setPresentation(false);
   if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
     event.preventDefault();
