@@ -11,8 +11,8 @@ placeholder instead of a broken image.
 | `wander.webp` | Wander card |
 | `on-the-ice-hatched.webp` | Hatched: On the Ice card |
 | `open-brush.jpg` | Open Brush card |
-| `youtube-360.jpg` | 360° YouTube Experiences card (not yet added) |
-| `human-anatomy-vr.jpg` | Human Anatomy VR card (not yet added) |
+| `youtube-vr.jpg` | 360° YouTube Experiences card (added) |
+| `human-anatomy-vr.jpg` | Human Anatomy VR card (added) |
 
 ## App demo clips
 
@@ -29,17 +29,28 @@ below to enable it — until the file exists, that click shows a dashed
 | `wander-example.gif` | Wander card (added) |
 | `on-the-ice-hatched-example.gif` | Hatched: On the Ice card (added) |
 | `tilt-brush-example.gif` | Open Brush card (added) |
-| `youtube-360-example.gif` | 360° YouTube Experiences card (not yet added) |
-| `human-anatomy-vr-example.gif` | Human Anatomy VR card (not yet added) |
+| `youtube-vr-example.gif` | 360° YouTube Experiences card (added) |
+| `human-anatomy-vr-example.gif` | Human Anatomy VR card (added) |
 
 Keep clips short (5–10s) and small — a big GIF will stall the slideshow on
-campus computers. The five added so far run 3.5MB–17MB; the two on the high
-end (`on-the-ice-hatched-example.gif` ~17MB, `traveling-while-black-example.gif`
-~17MB) are worth shrinking (fewer frames, lower resolution, or a GIF
-compressor) before this goes out for a live tour. If a clip has audio you
-care about or a compressed GIF still looks rough, ask to swap that slide's
-tag to a muted `<video>` instead — usually much smaller than an equivalent
-GIF for the same clip.
+campus computers. The seven added so far run anywhere from 0.76MB
+(`youtube-vr-example.gif`) up to **56.7MB** (`human-anatomy-vr-example.gif`,
+well past GitHub's 50MB warning threshold). `on-the-ice-hatched-example.gif`
+and `traveling-while-black-example.gif` are also large (~17MB each). All
+three are worth shrinking (fewer frames, lower resolution, or a GIF
+compressor) before this goes out for a live tour — `human-anatomy-vr-example.gif`
+especially, since at that size it'll visibly stall on a normal laptop. If a
+clip has audio you care about or a compressed GIF still looks rough, ask to
+swap that slide's tag to a muted `<video>` instead — usually much smaller
+than an equivalent GIF for the same clip.
+
+## Branding assets
+
+- `XR Lab Logo_White.png` &mdash; wordmark used in the nav bar and the floating
+  presentation-mode badge.
+- `XR LAB - Profile.png` &mdash; the square lab avatar used for social profiles,
+  reused here as the site favicon and social share preview image (`og:image`
+  in `index.html`).
 
 ## Guidelines
 

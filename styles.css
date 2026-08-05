@@ -186,8 +186,8 @@ h1 {
   display: block;
   width: min(100%, 480px);
   margin: 3rem auto 1.8rem;
+  border-radius: 28px;
   object-fit: contain;
-  transform: scaleX(-1);
   filter: drop-shadow(0 28px 40px rgba(0,0,0,.4));
 }
 
@@ -342,26 +342,55 @@ section {
   margin-bottom: 1rem;
 }
 
-.feedback-quote {
-  margin: 0 0 .65rem;
-  padding: .2rem 0 .2rem 1.1rem;
-  border-left: 3px solid var(--line);
-  color: var(--muted);
-  font-style: italic;
+.feedback-quote-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
 }
 
-.feedback-quote:last-child {
-  margin-bottom: 0;
+.feedback-quote {
+  margin: 0;
+  padding: .9rem 1rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.feedback-quote::before {
+  content: "\201C";
+  display: block;
+  margin-bottom: .2rem;
+  color: var(--accent-2);
+  font-size: 1.6em;
+  font-weight: 900;
+  line-height: .6;
+}
+
+.feedback-good .feedback-quote {
+  background: rgba(105,183,255,.08);
+}
+
+.feedback-improve .feedback-quote {
+  background: rgba(245,197,66,.08);
+}
+
+.feedback-improve .feedback-quote::before {
+  color: var(--accent);
 }
 
 .feedback-quote.is-placeholder {
-  padding: 1rem 1.2rem;
+  grid-column: 1 / -1;
   border: 2px dashed var(--line);
-  border-radius: 14px;
-  font-style: normal;
   font-weight: 700;
   font-size: .95rem;
   text-align: center;
+}
+
+.feedback-quote.is-placeholder::before {
+  content: none;
 }
 
 .feedback-source {
@@ -415,7 +444,7 @@ footer {
 .presentation-mark {
   position: fixed;
   left: 1.25rem;
-  top: 1.25rem;
+  bottom: 1.25rem;
   z-index: 100;
   display: none;
   align-items: center;
@@ -538,20 +567,29 @@ footer {
 }
 
 .presentation .feedback-columns {
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .presentation .feedback-column {
-  padding: 1.7rem 2.2rem;
+  padding: 1.8rem 2rem;
 }
 
 .presentation .feedback-column h3 {
-  font-size: 1.6rem;
-  margin-bottom: .7rem;
+  font-size: 1.7rem;
+  margin-bottom: .9rem;
+}
+
+.presentation .feedback-quote-list {
+  gap: 1rem;
 }
 
 .presentation .feedback-quote {
-  font-size: 1.15rem;
+  padding: 1.1rem 1.2rem;
+  font-size: 1.3rem;
+}
+
+.presentation .feedback-quote::before {
+  font-size: 1.8em;
 }
 
 .presentation .feedback-source {
@@ -795,10 +833,10 @@ body.presentation {
 @media (max-width: 620px) {
   .nav-inner { align-items: flex-start; }
   .brand-logo { height: 34px; }
-  .presentation-mark { left: .75rem; top: .75rem; padding: .5rem .8rem; }
+  .presentation-mark { left: .75rem; bottom: .75rem; padding: .5rem .8rem; }
   .presentation-mark img { height: 56px; }
   .slide-dots { bottom: 4.65rem; max-width: min(88vw, 340px); }
-  .grid-3, .grid-5, .loop { grid-template-columns: 1fr; }
+  .grid-3, .grid-5, .loop, .feedback-quote-list { grid-template-columns: 1fr; }
   .hero-card { min-height: 320px; }
   .hero-photo { margin-top: 2rem; }
   .quote { padding: 2rem; }
